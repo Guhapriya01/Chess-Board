@@ -19,7 +19,7 @@ for (let i = 0; i < n; i++) {
 
 board.className = "board";
 board.style.width = `${n*80}px`;
-//document.body.appendChild(board);
+document.body.appendChild(board);
 
 //    0 1 2 
 // 0  0 1 2
