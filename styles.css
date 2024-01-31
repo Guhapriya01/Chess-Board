@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ded8d8;
 }
 .box{
     display: inline-block;
@@ -10,5 +11,10 @@ body{
 }
 
 #board{
-    border : 3px solid black;
+    border : 3px solid #5c5a5a;
+}
+
+img{
+    height: 80px;
+    width: 80px;
 }

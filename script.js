@@ -7,7 +7,7 @@ for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
        const colDiv = document.createElement("div");
 
-       const color = (i + j) % 2 === 0 ? "white" : "black";
+       const color = (i + j) % 2 === 0 ? "white" : "grey";
 
        colDiv.style.backgroundColor = color;
        colDiv.className = "box";
@@ -26,10 +26,6 @@ board.style.width = `${n * 80}px`;
 document.body.appendChild(board);
 
 
-
-
-
-
 /*
    0 1 2 
 0  0 1 2
@@ -38,12 +34,6 @@ document.body.appendChild(board);
 colDiv.style.width = `${size}px`;
 colDiv.style.height = `${size}px`;
 let size = "80";
-
-
-const ev = document.getElementById("board");
-ev.addEventListener("click",(e)=>{
-   console.log(e.target.dataset);
-});
 
 
 */
