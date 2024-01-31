@@ -67,7 +67,7 @@ class ChessBoard {
             // place K,Q,B,N,R
             let div = document.querySelector(`[data-x="7"][data-y="${i}"]`);
             let img = document.createElement("img");
-            img.src = `Images/${this.#pieceNames[i]}-w.png`;
+            img.src = `Images/${this.#pieceNames[i]}-W.png`;
             div.append(img);
 
             
