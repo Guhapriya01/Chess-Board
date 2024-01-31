@@ -5,26 +5,28 @@ class ChessBoard {
     // private variables
     #board; 
     #pieceNames = ["R","N","B","Q","K","B","N","R"]; 
+    #currentPiece;
 
     constructor(){
         this.#board = Array.from({length:8},()=>Array(8).fill(null));
         this.renderBoard();
         this.initializeBoard();
         this.addEventHandlers();
+        console.log(this.#currentPiece);
     }
 
     initializeBoard(){
 
         // Place BLACK pieces in board array and in the HTML document
 
-        this.#board[0][0] = new Rook("R", false);
-        this.#board[0][1] = new Knight("N", false);
-        this.#board[0][2] = new Bishop("B", false);
-        this.#board[0][3] = new Queen("Q", false);
-        this.#board[0][4] = new King("K", false);
-        this.#board[0][5] = new Bishop("B", false);
-        this.#board[0][6] = new Knight("N", false);
-        this.#board[0][7] = new Rook("R", false);
+        this.#board[0][0] = new Rook(false);
+        this.#board[0][1] = new Knight(false);
+        this.#board[0][2] = new Bishop(false);
+        this.#board[0][3] = new Queen(false);
+        this.#board[0][4] = new King(false);
+        this.#board[0][5] = new Bishop(false);
+        this.#board[0][6] = new Knight(false);
+        this.#board[0][7] = new Rook(false);
 
 
         for (let i = 0; i < 8; i++) {
@@ -40,7 +42,7 @@ class ChessBoard {
         
         for (let i = 0; i < 8; i++) {
 
-            this.#board[1][i] = new Pawn("P", false); 
+            this.#board[1][i] = new Pawn(false); 
 
             // Place pawn images 
             let div = document.querySelector(`[data-x="1"][data-y="${i}"]`);
@@ -52,14 +54,14 @@ class ChessBoard {
 
         // Place WHITE pieces in board array and in the HTML document
 
-        this.#board[7][0] = new Rook("R", true);
-        this.#board[7][1] = new Knight("N", true);
-        this.#board[7][2] = new Bishop("B", true);
-        this.#board[7][3] = new Queen("Q", true);
-        this.#board[7][4] = new King("K", true);
-        this.#board[7][5] = new Bishop("B", true);
-        this.#board[7][6] = new Knight("N", true);
-        this.#board[7][7] = new Rook("R", true);
+        this.#board[7][0] = new Rook(true);
+        this.#board[7][1] = new Knight(true);
+        this.#board[7][2] = new Bishop(true);
+        this.#board[7][3] = new Queen(true);
+        this.#board[7][4] = new King(true);
+        this.#board[7][5] = new Bishop(true);
+        this.#board[7][6] = new Knight(true);
+        this.#board[7][7] = new Rook(true);
 
 
         for (let i = 0; i < 8; i++) {
@@ -75,7 +77,7 @@ class ChessBoard {
         
         for (let i = 0; i < 8; i++) {
 
-            this.#board[6][i] = new Pawn("P", true); 
+            this.#board[6][i] = new Pawn(true); 
 
             // Place pawn 
             let div = document.querySelector(`[data-x="6"][data-y="${i}"]`);
@@ -125,23 +127,35 @@ class ChessBoard {
 
         // for each piece -  add click event
         const ev = document.getElementById("board");
-        ev.addEventListener("click",(e)=>{
 
-            if(event.target.tagName === 'IMG'){
+        ev.addEventListener("click",(e)=>{
+            let x;
+            let y;
+            if(e.target.tagName === 'IMG'){
                 // for cell with piece
-                console.log(e.target.parentNode);
+                x = e.target.parentNode.dataset.x;
+                y = e.target.parentNode.dataset.y;
             }
             else{
                 // for empty cell
-                console.log(e.target);
+                x = e.target.dataset.x;
+                y = e.target.dataset.y;
             }
+            
+        
             
         });
 
     }
 
     handleCellClick(x, y){
-
+        if(this.#currentPiece){
+            this.#currentPiece=this.#board[x][y];
+            console.log("null");
+        }
+        else{
+            console.log("already set");
+        }
     }
 
     movePiece(fromX, fromY, toX, toY){
