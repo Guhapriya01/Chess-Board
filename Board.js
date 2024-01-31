@@ -4,7 +4,7 @@ class ChessBoard {
 
     // private variables
     #board; 
-    #pieceNames = ["R","N","B","K","Q","B","N","R"]; 
+    #pieceNames = ["R","N","B","Q","K","B","N","R"]; 
 
     constructor(){
         this.#board = Array.from({length:8},()=>Array(8).fill(null));
@@ -20,8 +20,8 @@ class ChessBoard {
         this.#board[0][0] = new Rook("R", false);
         this.#board[0][1] = new Knight("N", false);
         this.#board[0][2] = new Bishop("B", false);
-        this.#board[0][3] = new King("K", false);
-        this.#board[0][4] = new Queen("Q", false);
+        this.#board[0][3] = new Queen("Q", false);
+        this.#board[0][4] = new King("K", false);
         this.#board[0][5] = new Bishop("B", false);
         this.#board[0][6] = new Knight("N", false);
         this.#board[0][7] = new Rook("R", false);
@@ -55,8 +55,8 @@ class ChessBoard {
         this.#board[7][0] = new Rook("R", true);
         this.#board[7][1] = new Knight("N", true);
         this.#board[7][2] = new Bishop("B", true);
-        this.#board[7][3] = new King("K", true);
-        this.#board[7][4] = new Queen("Q", true);
+        this.#board[7][3] = new Queen("Q", true);
+        this.#board[7][4] = new King("K", true);
         this.#board[7][5] = new Bishop("B", true);
         this.#board[7][6] = new Knight("N", true);
         this.#board[7][7] = new Rook("R", true);
