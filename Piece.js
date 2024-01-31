@@ -18,12 +18,12 @@ class King extends Piece{
         super("K",isWhite)
     }
 
-    move(from, to){
-
+    move(fromX, fromY, toX, toY){
+        
     }
 
-    isValidMove(from, to) {
-
+    isValidMove(fromX, fromY, toX, toY){
+        
     }
 }
 
@@ -33,11 +33,11 @@ class Queen extends Piece{
         super("Q",isWhite)
     }
 
-    move(from, to){
+    move(fromX, fromY, toX, toY){
         
     }
 
-    isValidMove(from, to) {
+    isValidMove(fromX, fromY, toX, toY){
         
     }
 }
@@ -48,11 +48,11 @@ class Bishop extends Piece{
         super("B",isWhite)
     }
 
-    move(from, to){
+    move(fromX, fromY, toX, toY){
         
     }
 
-    isValidMove(from, to) {
+    isValidMove(fromX, fromY, toX, toY){
         
     }
 }
@@ -63,11 +63,11 @@ class Knight extends Piece{
         super("N",isWhite)
     }
 
-    move(from, to){
+    move(fromX, fromY, toX, toY){
         
     }
 
-    isValidMove(from, to) {
+    isValidMove(fromX, fromY, toX, toY){
         
     }
 }
@@ -78,11 +78,11 @@ class Rook extends Piece{
         super("R",isWhite)
     }
 
-    move(from, to){
+    move(fromX, fromY, toX, toY){
         
     }
 
-    isValidMove(from, to) {
+    isValidMove(fromX, fromY, toX, toY){
         
     }
 }
@@ -93,11 +93,11 @@ class Pawn extends Piece{
         super("P",isWhite)
     }
 
-    move(from, to){
+    move(fromX, fromY, toX, toY){
         
     }
 
-    isValidMove(from, to) {
+    isValidMove(fromX, fromY, toX, toY){
         
     }
 }

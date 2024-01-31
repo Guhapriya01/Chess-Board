@@ -29,14 +29,14 @@ class ChessBoard {
     }
 
     renderPieces(){
-        
+
         // place pieces in board (html)
 
     }
 
     addEventHandlers(){
 
-        // for each piece
+        // for each piece - click event
 
     }
 
@@ -45,7 +45,7 @@ class ChessBoard {
         // 
     }
 
-    movePiece(from, to){
+    movePiece(fromX, fromY, toX, toY){
 
     }
 
