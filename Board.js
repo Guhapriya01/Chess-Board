@@ -6,6 +6,8 @@ class ChessBoard {
 
     constructor(){
         this.#board = Array.from({length:8},()=>Array(8).fill(null));
+        this.initializeBoard();
+        this.renderBoardAndPieces();
     }
 
     initializeBoard(){
@@ -25,40 +27,40 @@ class ChessBoard {
             this.#board[1][i] = new Pawn("P", false);   
         }
 
-        // place WHITE pieces in board array
+        // Place WHITE pieces in board array
     }
 
-    renderPieces(){
+    renderBoardAndPieces(){
 
-        // place pieces in board (html)
+        // Render board and place pieces in board (document)
 
         let n = 8;
         let board = document.createElement("div");
 
         for (let i = 0; i < n; i++) {
-        const rowDiv = document.createElement("div");
+            const rowDiv = document.createElement("div");
 
-        for (let j = 0; j < n; j++) {
-        const colDiv = document.createElement("div");
+            for (let j = 0; j < n; j++) {
+                const colDiv = document.createElement("div");
 
-        const color = (i + j) % 2 === 0 ? "white" : "black";
+                const color = (i + j) % 2 === 0 ? "white" : "black";
 
-        colDiv.style.backgroundColor = color;
-        colDiv.className = "box";
-        colDiv.dataset.x = i;
-        colDiv.dataset.y = j;
+                colDiv.style.backgroundColor = color;
+                colDiv.className = "box";
+              
+                colDiv.dataset.x = i;
+                colDiv.dataset.y = j;
+              
+                rowDiv.appendChild(colDiv);
+            } 
 
-        rowDiv.appendChild(colDiv);
-        } 
-
-        rowDiv.style.height = "80px";
-        board.appendChild(rowDiv);
+            rowDiv.style.height = "80px";
+            board.appendChild(rowDiv);
         }
 
         board.id = "board";
         board.style.width = `${n * 80}px`;
         document.body.appendChild(board);
-
 
     }
 
@@ -70,7 +72,6 @@ class ChessBoard {
 
     handleCellClick(x, y){
 
-        // 
     }
 
     movePiece(fromX, fromY, toX, toY){
@@ -81,3 +82,5 @@ class ChessBoard {
 
     }
 }
+
+const chessBoard = new ChessBoard();
