@@ -5,14 +5,15 @@ class ChessBoard {
     // private variables
     #board; 
     #pieceNames = ["R","N","B","Q","K","B","N","R"]; 
-    #currentPiece;
+    #x;
+    #y;
+    #flag = false;
 
     constructor(){
         this.#board = Array.from({length:8},()=>Array(8).fill(null));
         this.renderBoard();
         this.initializeBoard();
         this.addEventHandlers();
-        console.log(this.#currentPiece);
     }
 
     initializeBoard(){
@@ -129,33 +130,27 @@ class ChessBoard {
         const ev = document.getElementById("board");
 
         ev.addEventListener("click",(e)=>{
-            let x;
-            let y;
+
             if(e.target.tagName === 'IMG'){
                 // for cell with piece
-                x = e.target.parentNode.dataset.x;
-                y = e.target.parentNode.dataset.y;
+                this.#x = e.target.parentNode.dataset.x;
+                this.#y = e.target.parentNode.dataset.y;
             }
             else{
                 // for empty cell
-                x = e.target.dataset.x;
-                y = e.target.dataset.y;
+                this.#x = e.target.dataset.x;
+                this.#y = e.target.dataset.y;
             }
-            
-        
+
+            this.#flag = !this.#flag;
+            this.handleCellClick();
             
         });
 
     }
 
-    handleCellClick(x, y){
-        if(this.#currentPiece){
-            this.#currentPiece=this.#board[x][y];
-            console.log("null");
-        }
-        else{
-            console.log("already set");
-        }
+    handleCellClick(){
+    
     }
 
     movePiece(fromX, fromY, toX, toY){
