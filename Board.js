@@ -32,6 +32,34 @@ class ChessBoard {
 
         // place pieces in board (html)
 
+        let n = 8;
+        let board = document.createElement("div");
+
+        for (let i = 0; i < n; i++) {
+        const rowDiv = document.createElement("div");
+
+        for (let j = 0; j < n; j++) {
+        const colDiv = document.createElement("div");
+
+        const color = (i + j) % 2 === 0 ? "white" : "black";
+
+        colDiv.style.backgroundColor = color;
+        colDiv.className = "box";
+        colDiv.dataset.x = i;
+        colDiv.dataset.y = j;
+
+        rowDiv.appendChild(colDiv);
+        } 
+
+        rowDiv.style.height = "80px";
+        board.appendChild(rowDiv);
+        }
+
+        board.id = "board";
+        board.style.width = `${n * 80}px`;
+        document.body.appendChild(board);
+
+
     }
 
     addEventHandlers(){
@@ -40,7 +68,7 @@ class ChessBoard {
 
     }
 
-    handleCellClick(row, col){
+    handleCellClick(x, y){
 
         // 
     }
