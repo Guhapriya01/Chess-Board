@@ -8,6 +8,10 @@ class Piece {
         this.isCaptured = false;
     }
 
+    getPiece() {
+        return this;
+    }
+
 }
 
 // Creating specific pieces
