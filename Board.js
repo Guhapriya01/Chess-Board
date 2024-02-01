@@ -5,9 +5,9 @@ class ChessBoard {
     // private variables
     #board; 
     #pieceNames = ["R","N","B","Q","K","B","N","R"]; 
-    #x;
-    #y;
-    #flag = false;
+    #flag = true;
+    #from;
+    #captured = [];
 
     constructor(){
         this.#board = Array.from({length:8},()=>Array(8).fill(null));
@@ -33,12 +33,9 @@ class ChessBoard {
         for (let i = 0; i < 8; i++) {
 
             // place K,Q,B,N,R
-            let div = document.querySelector(`[data-x="0"][data-y="${i}"]`);
-            let img = document.createElement("img");
+            let img = document.querySelector(`[data-x="0"][data-y="${i}"]`).childNodes[0];
             img.src = `Images/${this.#pieceNames[i]}-B.png`;
-            div.append(img);
-
-            
+    
         }
         
         for (let i = 0; i < 8; i++) {
@@ -46,10 +43,8 @@ class ChessBoard {
             this.#board[1][i] = new Pawn(false); 
 
             // Place pawn images 
-            let div = document.querySelector(`[data-x="1"][data-y="${i}"]`);
-            let img = document.createElement("img");
+            let img = document.querySelector(`[data-x="1"][data-y="${i}"]`).childNodes[0];
             img.src = "Images/P-B.png";
-            div.append(img);
             
         }
 
@@ -68,12 +63,9 @@ class ChessBoard {
         for (let i = 0; i < 8; i++) {
 
             // place K,Q,B,N,R
-            let div = document.querySelector(`[data-x="7"][data-y="${i}"]`);
-            let img = document.createElement("img");
+            let img = document.querySelector(`[data-x="7"][data-y="${i}"]`).childNodes[0];
             img.src = `Images/${this.#pieceNames[i]}-W.png`;
-            div.append(img);
 
-            
         }
         
         for (let i = 0; i < 8; i++) {
@@ -81,10 +73,8 @@ class ChessBoard {
             this.#board[6][i] = new Pawn(true); 
 
             // Place pawn 
-            let div = document.querySelector(`[data-x="6"][data-y="${i}"]`);
-            let img = document.createElement("img");
-            img.src = "Images/P-W.png";
-            div.append(img);
+            let img = document.querySelector(`[data-x="6"][data-y="${i}"]`).childNodes[0];
+            img.src =  "Images/P-W.png";
             
         }
 
@@ -103,14 +93,15 @@ class ChessBoard {
             for (let j = 0; j < n; j++) {
                 const colDiv = document.createElement("div");
 
-                const color = (i + j) % 2 === 0 ? "white" : "#5c5a5a";
-
+                const color = (i + j) % 2 === 0 ? "white" : "cadetblue";
                 colDiv.style.backgroundColor = color;
                 colDiv.className = "box";
-              
                 colDiv.dataset.x = i;
                 colDiv.dataset.y = j;
-              
+
+                const img = document.createElement("img");
+                img.src = "Images/empty.png";
+                colDiv.appendChild(img);
                 rowDiv.appendChild(colDiv);
             } 
 
@@ -127,34 +118,65 @@ class ChessBoard {
     addEventHandlers(){
 
         // for each piece -  add click event
-        const ev = document.getElementById("board");
+        const board = document.getElementById("board");
 
-        ev.addEventListener("click",(e)=>{
-
+        board.addEventListener("click",(e)=>{
+            
             if(e.target.tagName === 'IMG'){
                 // for cell with piece
-                this.#x = e.target.parentNode.dataset.x;
-                this.#y = e.target.parentNode.dataset.y;
+                if(this.#flag){
+                    this.#from = e.target.parentNode;
+                }
+                else{
+                    this.movePiece(this.#from, e.target.parentNode);
+                }
             }
             else{
                 // for empty cell
-                this.#x = e.target.dataset.x;
-                this.#y = e.target.dataset.y;
-            }
-
+                if(this.#flag){
+                    this.#from = e.target;
+                }
+                else{
+                    this.movePiece(this.#from, e.target);
+                }
+            } 
             this.#flag = !this.#flag;
-            this.handleCellClick();
-            
         });
-
     }
 
     handleCellClick(){
-    
+        
     }
 
-    movePiece(fromX, fromY, toX, toY){
+    movePiece(from, to){
 
+        let fromX = from.dataset.x;
+        let toX = to.dataset.x;
+
+        let fromY = from.dataset.y;
+        let toY = to.dataset.y;
+
+        // change in board
+
+        let fromPiece = this.#board[fromX][fromY];
+        let toPiece = this.#board[toX][toY];
+
+        this.#board[toX][toY] = fromPiece;
+        
+
+        // change in html
+
+        // validate for captured
+
+        if(toPiece!=null && fromPiece.isWhite != toPiece.isWhite){
+            toPiece.isCaptured = true;
+            this.#captured.push(toPiece);
+        }
+
+        const fromSrc = from.childNodes[0].src;
+
+        from.childNodes[0].src = 'Images/empty.png';
+        to.childNodes[0].src = fromSrc;
     }
 
     checkForWin(){

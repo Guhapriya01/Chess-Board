@@ -10,10 +10,11 @@ body{
 }
 
 #board{
-    border : 3px solid #5c5a5a;
+    border : 3px solid cadetblue;
 }
 
 img{
     height: 80px;
     width: 80px;
+    cursor: pointer;
 }
