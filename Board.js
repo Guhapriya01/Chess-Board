@@ -20,15 +20,14 @@ class ChessBoard {
 
         // Place BLACK pieces in board array and in the HTML document
 
-        this.#board[0][0] = new Rook(false);
-        this.#board[0][1] = new Knight(false);
-        this.#board[0][2] = new Bishop(false);
-        this.#board[0][3] = new Queen(false);
-        this.#board[0][4] = new King(false);
-        this.#board[0][5] = new Bishop(false);
-        this.#board[0][6] = new Knight(false);
-        this.#board[0][7] = new Rook(false);
-
+        this.#board[0][0] = new Rook("black");
+        this.#board[0][1] = new Knight("black");
+        this.#board[0][2] = new Bishop("black");
+        this.#board[0][3] = new Queen("black");
+        this.#board[0][4] = new King("black");
+        this.#board[0][5] = new Bishop("black");
+        this.#board[0][6] = new Knight("black");
+        this.#board[0][7] = new Rook("black");
 
         for (let i = 0; i < 8; i++) {
 
@@ -50,15 +49,14 @@ class ChessBoard {
 
         // Place WHITE pieces in board array and in the HTML document
 
-        this.#board[7][0] = new Rook(true);
-        this.#board[7][1] = new Knight(true);
-        this.#board[7][2] = new Bishop(true);
-        this.#board[7][3] = new Queen(true);
-        this.#board[7][4] = new King(true);
-        this.#board[7][5] = new Bishop(true);
-        this.#board[7][6] = new Knight(true);
-        this.#board[7][7] = new Rook(true);
-
+        this.#board[7][0] = new Rook("white");
+        this.#board[7][1] = new Knight("white");
+        this.#board[7][2] = new Bishop("white");
+        this.#board[7][3] = new Queen("white");
+        this.#board[7][4] = new King("white");
+        this.#board[7][5] = new Bishop("white");
+        this.#board[7][6] = new Knight("white");
+        this.#board[7][7] = new Rook("white");
 
         for (let i = 0; i < 8; i++) {
 
@@ -93,7 +91,7 @@ class ChessBoard {
             for (let j = 0; j < n; j++) {
                 const colDiv = document.createElement("div");
 
-                const color = (i + j) % 2 === 0 ? "white" : "cadetblue";
+                const color = (i + j) % 2 === 0 ? "#EADAB9" : "#C2A482";
                 colDiv.style.backgroundColor = color;
                 colDiv.className = "box";
                 colDiv.dataset.x = i;
@@ -148,7 +146,6 @@ class ChessBoard {
 
         let fromX = from.dataset.x;
         let toX = to.dataset.x;
-
         let fromY = from.dataset.y;
         let toY = to.dataset.y;
 
@@ -156,13 +153,21 @@ class ChessBoard {
 
         let fromPiece = this.#board[fromX][fromY];
         let toPiece = this.#board[toX][toY];
-
+      
+      
+        // same colour
+      
+        if(toPiece!=null && fromPiece!=null && fromPiece.color === toPiece.color){
+            console.log("Moving pieces of same color");
+            return;
+        }
+        
         this.#board[fromX][fromY] = null;
         this.#board[toX][toY] = fromPiece;
 
         // validate for captured
 
-        if(toPiece!=null && fromPiece.isWhite != toPiece.isWhite){
+        if(toPiece!=null && fromPiece.color !== toPiece.color){
             toPiece.isCaptured = true;
             this.#captured.push(toPiece);
         }
@@ -171,7 +176,7 @@ class ChessBoard {
 
         const fromSrc = from.childNodes[0].src;
 
-        from.childNodes[0].src = 'Images/empty.png';
+        from.childNodes[0].src = 'https://gal.sh/img/empty-4x3.png';
         to.childNodes[0].src = fromSrc;
 
         console.log(this.#captured);

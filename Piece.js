@@ -2,9 +2,9 @@
 
 class Piece {
 
-    constructor(name, isWhite){
+    constructor(name, color){
         this.name = name;
-        this.isWhite = isWhite;
+        this.color = color;
         this.isCaptured = false;
     }
 
@@ -18,8 +18,8 @@ class Piece {
 
 class King extends Piece{
 
-    constructor(isWhite){
-        super("K",isWhite);
+    constructor(color){
+        super("K",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -33,8 +33,8 @@ class King extends Piece{
 
 class Queen extends Piece{
 
-    constructor(isWhite){
-        super("Q",isWhite);
+    constructor(color){
+        super("Q",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -48,8 +48,8 @@ class Queen extends Piece{
 
 class Bishop extends Piece{
 
-    constructor(isWhite){
-        super("B",isWhite);
+    constructor(color){
+        super("B",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -63,8 +63,8 @@ class Bishop extends Piece{
 
 class Knight extends Piece{
 
-    constructor(isWhite){
-        super("N",isWhite);
+    constructor(color){
+        super("N",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -78,8 +78,8 @@ class Knight extends Piece{
 
 class Rook extends Piece{
 
-    constructor(isWhite){
-        super("R",isWhite);
+    constructor(color){
+        super("R",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -93,8 +93,8 @@ class Rook extends Piece{
 
 class Pawn extends Piece{
 
-    constructor(isWhite){
-        super("P",isWhite);
+    constructor(color){
+        super("P",color);
     }
 
     move(fromX, fromY, toX, toY){
@@ -105,3 +105,4 @@ class Pawn extends Piece{
         
     }
 }
+
