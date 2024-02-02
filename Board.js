@@ -32,7 +32,7 @@ class ChessBoard {
 
         for (let i = 0; i < 8; i++) {
 
-            // place K,Q,B,N,R
+            // Place K,Q,B,N,R
             let img = document.querySelector(`[data-x="0"][data-y="${i}"]`).childNodes[0];
             img.src = `Images/${this.#pieceNames[i]}-B.png`;
     
@@ -42,7 +42,7 @@ class ChessBoard {
 
             this.#board[1][i] = new Pawn(false); 
 
-            // Place pawn images 
+            // Place Pawn Piece 
             let img = document.querySelector(`[data-x="1"][data-y="${i}"]`).childNodes[0];
             img.src = "Images/P-B.png";
             
@@ -144,10 +144,6 @@ class ChessBoard {
         });
     }
 
-    handleCellClick(){
-        
-    }
-
     movePiece(from, to){
 
         let fromX = from.dataset.x;
@@ -161,10 +157,8 @@ class ChessBoard {
         let fromPiece = this.#board[fromX][fromY];
         let toPiece = this.#board[toX][toY];
 
+        this.#board[fromX][fromY] = null;
         this.#board[toX][toY] = fromPiece;
-        
-
-        // change in html
 
         // validate for captured
 
@@ -173,10 +167,16 @@ class ChessBoard {
             this.#captured.push(toPiece);
         }
 
+        // change in html
+
         const fromSrc = from.childNodes[0].src;
 
         from.childNodes[0].src = 'Images/empty.png';
         to.childNodes[0].src = fromSrc;
+
+        console.log(this.#captured);
+        console.log(this.#board);
+
     }
 
     checkForWin(){
